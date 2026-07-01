@@ -23,17 +23,13 @@ python3 -m http.server 4173
 # → http://localhost:4173
 ```
 
-## Before launch — TODOs
+## Configuration
 
-1. **Contact form**: create a free form at [formspree.io](https://formspree.io)
-   (point it at `ematos@matosdistribution.com`), then paste the endpoint into
-   `FORM_ENDPOINT` at the top of `script.js`. Until then the form falls back to
-   opening the visitor's mail app.
-2. **Social links**: replace the two `href="#"` placeholders in the contact
-   section of `index.html` with the real Instagram and LinkedIn URLs
-   (search for `TODO`).
-3. **Domain**: `index.html`, `robots.txt`, and `sitemap.xml` assume
-   `https://www.matosdistribution.com` — update if the domain differs.
+- **Contact form**: submissions post to Formspree
+  (`FORM_ENDPOINT` in `script.js`) and are delivered to
+  `ematos@matosdistribution.com`.
+- **Domain**: `index.html`, `robots.txt`, and `sitemap.xml` reference
+  `https://www.matosdistribution.com`.
 
 ## Deploy (Vercel)
 

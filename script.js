@@ -1,6 +1,6 @@
 // Paste your Formspree endpoint here (e.g. "https://formspree.io/f/abcdwxyz").
 // While empty, the form falls back to opening the visitor's mail app.
-const FORM_ENDPOINT = "";
+const FORM_ENDPOINT = "https://formspree.io/f/mqevyjeo";
 const CONTACT_EMAIL = "ematos@matosdistribution.com";
 
 // --- Mobile nav ---
