@@ -112,6 +112,31 @@ const statObserver = new IntersectionObserver(
 
 document.querySelectorAll(".fact-list strong").forEach((el) => statObserver.observe(el));
 
+// --- Subtle scroll parallax ---
+const parallaxEls = document.querySelectorAll("[data-parallax]");
+if (parallaxEls.length && !reducedMotion) {
+  let ticking = false;
+  const apply = () => {
+    const vh = window.innerHeight;
+    for (const el of parallaxEls) {
+      const r = el.getBoundingClientRect();
+      const progress = (r.top + r.height / 2 - vh / 2) / vh; // ~ -0.5..0.5 across the viewport
+      const strength = parseFloat(el.dataset.parallax) || 20;
+      el.style.transform = `translate3d(0, ${(-progress * strength).toFixed(1)}px, 0)`;
+    }
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(apply);
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  apply();
+}
+
 // --- Revenue estimator ---
 const estNights = document.getElementById("est-nights");
 if (estNights) {

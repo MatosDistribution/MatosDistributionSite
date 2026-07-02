@@ -35,6 +35,7 @@
 
   <!-- Fonts: Anton self-hosted (preloaded — it renders the headline), Inter from Google -->
   <link rel="preload" href="/assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/machine-front.webp" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -51,7 +52,7 @@
     "url": "https://www.matosdistribution.com/",
     "email": "ematos@matosdistribution.com",
     "telephone": "+1-787-479-1188",
-    "logo": "https://www.matosdistribution.com/assets/logo-mark.png",
+    "logo": "https://www.matosdistribution.com/assets/logo-mark.webp",
     "image": "https://www.matosdistribution.com/og-image.png",
     "contactPoint": {
       "@type": "ContactPoint",
@@ -125,14 +126,18 @@
 
     <!-- HERO -->
     <section class="hero" aria-label="Introduction">
-      <img class="hero-mark" src="/assets/logo-mark.png" alt="" aria-hidden="true">
-      <div class="hero-inner reveal">
-        <p class="hero-kicker">Smart Vending — Puerto Rico</p>
-        <h1>The Future of<br>Convenience<br>Is Here</h1>
-        <p class="hero-sub">Where smart vending meets nightlife.</p>
-        <div class="hero-actions">
-          <a class="btn btn-solid" href="#contact">Partner With Us</a>
-          <a class="btn btn-ghost" href="#machines">See The Machines</a>
+      <div class="hero-inner">
+        <div class="hero-copy reveal">
+          <p class="hero-kicker">Smart Vending — Puerto Rico</p>
+          <h1>The Future of<br>Convenience<br>Is Here</h1>
+          <p class="hero-sub">Where smart vending meets nightlife.</p>
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="#contact">Partner With Us</a>
+            <a class="btn btn-ghost" href="#machines">See The Machines</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <img class="hero-machine" data-parallax="34" src="/assets/machine-front.webp" alt="Matos Distribution Mega Wall smart vending machine with a lit touchscreen" width="1040" height="1040">
         </div>
       </div>
       <div class="hero-marquee" aria-hidden="true">
@@ -143,6 +148,16 @@
       </div>
     </section>
 
+    <!-- TRUST STRIP -->
+    <section class="trust-strip" aria-label="Credentials">
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V5l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.5l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Licensed</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V5l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.5l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Insured</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V5l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.5l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Fully Compliant</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l7 3v6c0 4.4-3 8.3-7 9.5C8 19.3 5 15.4 5 11V5l7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 11.5l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>100% Locally Owned</li>
+      </ul>
+    </section>
+
     <!-- ABOUT -->
     <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container">
@@ -150,7 +165,7 @@
         <div class="split">
           <div class="about-heading-col">
             <h2 id="about-heading" class="reveal">Built Locally. <br>Designed to Elevate Nightlife.</h2>
-            <img class="about-mark reveal" src="/assets/logo-mark.png" alt="" aria-hidden="true">
+            <img class="about-mark reveal" src="/assets/logo-mark.webp" alt="" aria-hidden="true">
           </div>
           <div class="split-body reveal">
             <p>Matos Distribution is a family-owned business founded in Puerto Rico in 2025. Our mission is to innovate across the island by bringing modern, smart vending to the venues where the night happens.</p>
@@ -175,7 +190,7 @@
             <p class="section-lead reveal">From your first message to a working machine in 1–2 weeks — and you never lift a finger. We install it, stock it, and keep it running.</p>
           </div>
           <div class="machine-visual reveal">
-            <img class="machine-photo" src="/assets/machine-interior.png" alt="An open Matos Distribution vending machine fully stocked with nightlife essentials" width="1200" height="1200" loading="lazy">
+            <img class="machine-photo" data-parallax="14" src="/assets/machine-interior.webp" alt="An open Matos Distribution vending machine fully stocked with nightlife essentials" width="1200" height="1200" loading="lazy">
           </div>
         </div>
         <div class="feature-grid steps-grid">
@@ -204,7 +219,7 @@
         <p class="section-kicker reveal">03 — Our Machines</p>
         <div class="split split-reverse">
           <div class="machine-visual reveal">
-            <img class="machine-photo" src="/assets/machine-front.png" alt="Matos Distribution Mega Wall smart vending machine — lit touchscreen, contactless card reader, and built-in ID scanner" width="1040" height="1040" loading="lazy">
+            <img class="machine-photo" data-parallax="14" src="/assets/machine-front.webp" alt="Matos Distribution Mega Wall smart vending machine — lit touchscreen, contactless card reader, and built-in ID scanner" width="1040" height="1040" loading="lazy">
           </div>
           <div>
             <h2 id="machines-heading" class="reveal">Engineered for the Night Shift</h2>
