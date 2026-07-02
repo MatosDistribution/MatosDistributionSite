@@ -47,6 +47,10 @@ h1 { font-size: clamp(3.2rem, 11vw, 7.5rem); }
 h2 { font-size: clamp(2rem, 5.5vw, 3.6rem); margin-bottom: 1.5rem; }
 h3 { font-size: 1.35rem; letter-spacing: 0.06em; }
 
+/* Spanish headlines need looser leading so accents (Á, Ñ, Ú…) clear the line above */
+html[lang="es"] h1,
+html[lang="es"] h2 { line-height: 1.15; }
+
 p { color: var(--light); }
 
 /* ---------- Nav ---------- */
@@ -322,7 +326,8 @@ p { color: var(--light); }
   content: "";
   position: absolute;
   left: 0;
-  top: 1.05em;
+  /* padding-top (0.45em) + half a 1.65 line box = first-line center */
+  top: 1.275em;
   width: 0.9rem;
   height: 1px;
   background: var(--white);
