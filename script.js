@@ -3,6 +3,40 @@
 const FORM_ENDPOINT = "https://formspree.io/f/mqevyjeo";
 const CONTACT_EMAIL = "ematos@matosdistribution.com";
 
+// WhatsApp number, digits only with country code (e.g. "17875551234").
+// While empty, all WhatsApp buttons stay hidden.
+const WHATSAPP_NUMBER = "";
+
+const IS_ES = document.documentElement.lang === "es";
+
+// UI strings for both languages
+const T = IS_ES
+  ? {
+      whatsappMessage: "¡Hola! Me interesa una máquina de vending para mi local.",
+      invalidEmail: "Por favor ingresa un correo electrónico válido.",
+      openingMail: "Abriendo tu aplicación de correo…",
+      mailSubject: "Interés en máquina de vending — ",
+      sending: "Enviando…",
+      thanks: "Gracias — te contactaremos pronto.",
+      error: `Algo salió mal. Escríbenos directamente a ${CONTACT_EMAIL}.`,
+    }
+  : {
+      whatsappMessage: "Hi! I'm interested in a vending machine for my venue.",
+      invalidEmail: "Please enter a valid email address.",
+      openingMail: "Opening your email app…",
+      mailSubject: "Vending machine inquiry — ",
+      sending: "Sending…",
+      thanks: "Thanks — we'll be in touch soon.",
+      error: `Something went wrong. Email us directly at ${CONTACT_EMAIL}.`,
+    };
+
+// --- WhatsApp buttons ---
+if (WHATSAPP_NUMBER) {
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(T.whatsappMessage)}`;
+  document.querySelectorAll("[data-whatsapp]").forEach((a) => (a.href = waUrl));
+  document.querySelectorAll("[data-whatsapp-ui]").forEach((el) => el.classList.add("is-active"));
+}
+
 // --- Mobile nav ---
 const toggle = document.querySelector(".nav-toggle");
 const menu = document.querySelector(".nav-links");
@@ -43,7 +77,7 @@ form.addEventListener("submit", async (e) => {
 
   const email = form.email.value.trim();
   if (!email || !form.email.checkValidity()) {
-    status.textContent = "Please enter a valid email address.";
+    status.textContent = T.invalidEmail;
     form.email.focus();
     return;
   }
@@ -57,18 +91,18 @@ form.addEventListener("submit", async (e) => {
 
   if (!FORM_ENDPOINT) {
     // Mailto fallback until a Formspree endpoint is configured
-    const subject = encodeURIComponent("Vending machine inquiry — " + [data.firstName, data.lastName].filter(Boolean).join(" "));
+    const subject = encodeURIComponent(T.mailSubject + [data.firstName, data.lastName].filter(Boolean).join(" "));
     const body = encodeURIComponent(
       `Name: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\n\n${data.message}`
     );
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    status.textContent = "Opening your email app…";
+    status.textContent = T.openingMail;
     return;
   }
 
   const button = form.querySelector("button[type=submit]");
   button.disabled = true;
-  status.textContent = "Sending…";
+  status.textContent = T.sending;
 
   try {
     const res = await fetch(FORM_ENDPOINT, {
@@ -78,9 +112,9 @@ form.addEventListener("submit", async (e) => {
     });
     if (!res.ok) throw new Error("Request failed");
     form.reset();
-    status.textContent = "Thanks — we'll be in touch soon.";
+    status.textContent = T.thanks;
   } catch {
-    status.textContent = `Something went wrong. Email us directly at ${CONTACT_EMAIL}.`;
+    status.textContent = T.error;
   } finally {
     button.disabled = false;
   }

@@ -106,6 +106,33 @@ p { color: var(--light); }
 }
 .nav-links a.nav-cta:hover { background: var(--white); color: var(--black); }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+.lang-switch a {
+  color: var(--gray);
+  text-decoration: none;
+  padding: 0.2rem 0.05rem;
+  transition: color 0.2s ease;
+}
+.lang-switch a:hover { color: var(--white); }
+.lang-switch a.is-active {
+  color: var(--white);
+  border-bottom: 1px solid var(--white);
+}
+.lang-switch span { color: var(--line); }
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -396,6 +423,52 @@ p { color: var(--light); }
 
 .form-status { font-size: 0.9rem; color: var(--gray); min-height: 1.4em; }
 
+/* WhatsApp elements stay hidden until a number is configured in script.js */
+.whatsapp-cta {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--line);
+  background: var(--near-black);
+  padding: 1.5rem;
+  margin-top: 2.2rem;
+  max-width: 26rem;
+}
+.whatsapp-cta.is-active { display: flex; }
+.whatsapp-cta p { font-size: 0.9rem; color: var(--gray); }
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+.btn-whatsapp svg { width: 20px; height: 20px; }
+
+.whatsapp-float {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  z-index: 90;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--black);
+  display: none;
+  place-items: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s ease;
+}
+.whatsapp-float.is-active { display: grid; }
+.whatsapp-float:hover { transform: scale(1.07); }
+.whatsapp-float svg { width: 26px; height: 26px; }
+
+.form-note {
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
 .social-links {
   list-style: none;
   display: flex;
@@ -455,6 +528,7 @@ p { color: var(--light); }
 
 @media (max-width: 620px) {
   .nav-toggle { display: flex; }
+  .nav-right { gap: 0.6rem; }
 
   .nav-links {
     position: absolute;
