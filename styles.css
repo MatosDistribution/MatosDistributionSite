@@ -710,7 +710,11 @@ p { color: var(--light); }
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
+  background: #25d366;
+  color: #fff;
+  border-color: #25d366;
 }
+.btn-whatsapp:hover { background: #1eb457; border-color: #1eb457; color: #fff; }
 .btn-whatsapp svg { width: 20px; height: 20px; }
 
 .whatsapp-float {
