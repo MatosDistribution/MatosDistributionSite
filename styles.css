@@ -9,6 +9,15 @@
   src: url("/assets/fonts/anton-latin.woff2") format("woff2");
 }
 
+/* Spanish display face — Anton's accents are too heavy at large sizes */
+@font-face {
+  font-family: "Saira Condensed";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/assets/fonts/saira-condensed-800-latin.woff2") format("woff2");
+}
+
 :root {
   --black: #0a0a0a;
   --near-black: #111111;
@@ -84,9 +93,9 @@ h1 { font-size: clamp(3.2rem, 11vw, 7.5rem); }
 h2 { font-size: clamp(2rem, 5.5vw, 3.6rem); margin-bottom: 1.5rem; }
 h3 { font-size: 1.35rem; letter-spacing: 0.06em; }
 
-/* Spanish headlines need looser leading so accents (Á, Ñ, Ú…) clear the line above */
-html[lang="es"] h1,
-html[lang="es"] h2 { line-height: 1.15; }
+/* Spanish uses Saira Condensed 800 — sleeker accents than Anton at display sizes */
+html[lang="es"] { --font-display: "Saira Condensed", "Arial Narrow", sans-serif; }
+html[lang="es"] h1 { letter-spacing: 0; }
 
 p { color: var(--light); }
 
