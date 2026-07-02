@@ -5,7 +5,7 @@ const CONTACT_EMAIL = "ematos@matosdistribution.com";
 
 // WhatsApp number, digits only with country code (e.g. "17875551234").
 // While empty, all WhatsApp buttons stay hidden.
-const WHATSAPP_NUMBER = "";
+const WHATSAPP_NUMBER = "17874791188";
 
 const IS_ES = document.documentElement.lang === "es";
 

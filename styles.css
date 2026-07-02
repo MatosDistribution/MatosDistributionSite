@@ -71,6 +71,9 @@ p { color: var(--light); }
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-family: var(--font-display);
   font-size: 1.25rem;
   letter-spacing: 0.08em;
@@ -79,6 +82,12 @@ p { color: var(--light); }
   white-space: nowrap;
 }
 .nav-logo span { color: var(--gray); }
+
+.nav-mark {
+  width: 30px;
+  height: 30px;
+  mix-blend-mode: screen; /* drops the mark's black disc into the dark background */
+}
 
 .nav-links {
   display: flex;
@@ -183,10 +192,23 @@ p { color: var(--light); }
 /* ---------- Hero ---------- */
 
 .hero {
+  position: relative;
+  overflow: hidden;
   min-height: calc(100svh - var(--nav-h));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.hero-mark {
+  position: absolute;
+  right: -5vw;
+  top: 10%;
+  width: clamp(320px, 36vw, 540px);
+  opacity: 0.14;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero-inner {
@@ -275,7 +297,7 @@ p { color: var(--light); }
   border-bottom: 1px solid var(--line);
   color: var(--gray);
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
 }
 .fact-list strong {
@@ -521,6 +543,7 @@ p { color: var(--light); }
 
 @media (max-width: 860px) {
   h2 br { display: none; } /* let long headings wrap naturally on small screens */
+  .hero-mark { display: none; }
   .split { grid-template-columns: 1fr; }
   .split-reverse > .machine-visual { order: 0; }
   .product-grid, .feature-grid { grid-template-columns: 1fr 1fr; }
