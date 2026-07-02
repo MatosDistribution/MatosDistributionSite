@@ -112,6 +112,41 @@ const statObserver = new IntersectionObserver(
 
 document.querySelectorAll(".fact-list strong").forEach((el) => statObserver.observe(el));
 
+// --- Revenue estimator ---
+const estNights = document.getElementById("est-nights");
+if (estNights) {
+  const estGuests = document.getElementById("est-guests");
+  const nightsVal = document.getElementById("est-nights-val");
+  const guestsVal = document.getElementById("est-guests-val");
+  const barOut = document.getElementById("est-bar");
+  const machineOut = document.getElementById("est-machine");
+
+  // Assumptions (see revenue estimator notes)
+  const CONVERSION = 0.025; // share of guests who buy from the machine
+  const AVG_TICKET = 13.5; // average machine purchase
+  const DRINK_VALUE = 10; // value of one retained drink sale
+  const WEEKS_PER_MONTH = 4.33;
+
+  const money = (n) => {
+    const rounded = n >= 1000 ? Math.round(n / 50) * 50 : Math.round(n / 10) * 10;
+    return "$" + rounded.toLocaleString("en-US");
+  };
+
+  const update = () => {
+    const nights = +estNights.value;
+    const guests = +estGuests.value;
+    nightsVal.textContent = nights;
+    guestsVal.textContent = guests.toLocaleString("en-US");
+    const buyersPerMonth = guests * CONVERSION * nights * WEEKS_PER_MONTH;
+    barOut.textContent = money(buyersPerMonth * DRINK_VALUE);
+    machineOut.textContent = money(buyersPerMonth * AVG_TICKET);
+  };
+
+  estNights.addEventListener("input", update);
+  estGuests.addEventListener("input", update);
+  update();
+}
+
 // --- Contact form ---
 const form = document.getElementById("contact-form");
 const status = form.querySelector(".form-status");
