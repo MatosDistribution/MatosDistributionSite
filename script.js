@@ -75,6 +75,13 @@ const status = form.querySelector(".form-status");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  // Honeypot: real users never see this field; bots fill it
+  if (form.company && form.company.value) {
+    status.textContent = T.thanks;
+    form.reset();
+    return;
+  }
+
   const email = form.email.value.trim();
   if (!email || !form.email.checkValidity()) {
     status.textContent = T.invalidEmail;
