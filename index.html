@@ -126,6 +126,7 @@
 
     <!-- HERO -->
     <section class="hero" aria-label="Introduction">
+      <img class="hero-mark" src="/assets/logo-mark.webp" alt="" aria-hidden="true">
       <div class="hero-inner">
         <div class="hero-copy reveal">
           <p class="hero-kicker">Smart Vending — Puerto Rico</p>
@@ -137,7 +138,19 @@
           </div>
         </div>
         <div class="hero-visual reveal">
-          <img class="hero-machine" data-parallax="34" src="/assets/machine-front.webp" alt="Matos Distribution Mega Wall smart vending machine with a lit touchscreen" width="1040" height="1040">
+          <div class="machine-switcher">
+            <button type="button" class="machine-stage machine-stage--hero" data-machine-advance aria-label="Show another machine model">
+              <img class="machine-img" data-machine-img data-parallax="30" src="/assets/machine-front.webp" alt="Mega Wall 2.0 smart vending machine with a lit touchscreen" width="1040" height="1040">
+            </button>
+            <div class="machine-switch-ui">
+              <span class="machine-name" data-machine-name>Mega Wall 2.0</span>
+              <span class="machine-dots" data-machine-dots aria-hidden="true"></span>
+              <button type="button" class="machine-switch-btn" data-machine-advance>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 3v6h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Switch model
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="hero-marquee" aria-hidden="true">
@@ -219,7 +232,19 @@
         <p class="section-kicker reveal">03 — Our Machines</p>
         <div class="split split-reverse">
           <div class="machine-visual reveal">
-            <img class="machine-photo" data-parallax="14" src="/assets/machine-front.webp" alt="Matos Distribution Mega Wall smart vending machine — lit touchscreen, contactless card reader, and built-in ID scanner" width="1040" height="1040" loading="lazy">
+            <div class="machine-switcher">
+              <button type="button" class="machine-stage" data-machine-advance aria-label="Show another machine model">
+                <img class="machine-img" data-machine-img data-parallax="14" src="/assets/machine-front.webp" alt="Mega Wall 2.0 smart vending machine — lit touchscreen, contactless card reader, and built-in ID scanner" width="1040" height="1040" loading="lazy">
+              </button>
+              <div class="machine-switch-ui">
+                <span class="machine-name" data-machine-name>Mega Wall 2.0</span>
+                <span class="machine-dots" data-machine-dots aria-hidden="true"></span>
+                <button type="button" class="machine-switch-btn" data-machine-advance>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 3v6h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Switch model
+                </button>
+              </div>
+            </div>
           </div>
           <div>
             <h2 id="machines-heading" class="reveal">Engineered for the Night Shift</h2>

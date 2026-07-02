@@ -137,6 +137,54 @@ if (parallaxEls.length && !reducedMotion) {
   apply();
 }
 
+// --- Machine model switcher (hero + Machines section stay in sync) ---
+const MACHINE_MODELS = [
+  { name: "Mega Wall 2.0", src: "/assets/machine-front.webp" },
+  { name: "Slim Wall", src: "/assets/machine-slimwall.webp" },
+  { name: "Mini Wall", src: "/assets/machine-miniwall.webp" },
+  { name: "Slim Tower", src: "/assets/machine-slimtower.webp" },
+  { name: "Weather Wall", src: "/assets/machine-weatherwall.webp" },
+];
+const machineTriggers = document.querySelectorAll("[data-machine-advance]");
+if (machineTriggers.length) {
+  const imgs = document.querySelectorAll("[data-machine-img]");
+  const names = document.querySelectorAll("[data-machine-name]");
+  const dotWraps = document.querySelectorAll("[data-machine-dots]");
+  let idx = 0;
+
+  dotWraps.forEach((wrap) => {
+    wrap.innerHTML = "";
+    MACHINE_MODELS.forEach(() => {
+      const dot = document.createElement("span");
+      dot.className = "machine-dot";
+      wrap.appendChild(dot);
+    });
+  });
+
+  // Preload every model so switching is instant
+  MACHINE_MODELS.forEach((m) => {
+    const im = new Image();
+    im.src = m.src;
+  });
+
+  const render = () => {
+    const model = MACHINE_MODELS[idx];
+    imgs.forEach((im) => (im.src = model.src));
+    names.forEach((n) => (n.textContent = model.name));
+    dotWraps.forEach((wrap) =>
+      [...wrap.children].forEach((d, i) => d.classList.toggle("is-active", i === idx))
+    );
+  };
+
+  const advance = () => {
+    idx = (idx + 1) % MACHINE_MODELS.length;
+    render();
+  };
+
+  machineTriggers.forEach((t) => t.addEventListener("click", advance));
+  render();
+}
+
 // --- Revenue estimator ---
 const estNights = document.getElementById("est-nights");
 if (estNights) {
