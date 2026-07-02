@@ -33,8 +33,21 @@ const T = IS_ES
 // --- WhatsApp buttons ---
 if (WHATSAPP_NUMBER) {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(T.whatsappMessage)}`;
-  document.querySelectorAll("[data-whatsapp]").forEach((a) => (a.href = waUrl));
+  document.querySelectorAll("[data-whatsapp]").forEach((a) => {
+    a.href = waUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
   document.querySelectorAll("[data-whatsapp-ui]").forEach((el) => el.classList.add("is-active"));
+
+  // On phones the nav CTA goes straight to WhatsApp; on desktop it scrolls to the form
+  if (window.matchMedia("(max-width: 620px)").matches) {
+    document.querySelectorAll(".nav-cta").forEach((a) => {
+      a.href = waUrl;
+      a.target = "_blank";
+      a.rel = "noopener";
+    });
+  }
 }
 
 // --- Mobile nav ---
@@ -53,11 +66,14 @@ menu.addEventListener("click", (e) => {
   }
 });
 
-// --- Scroll reveal ---
+// --- Scroll reveal (staggered: elements entering together cascade in) ---
 const observer = new IntersectionObserver(
   (entries) => {
+    let delay = 0;
     for (const entry of entries) {
       if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${delay}ms`;
+        delay = Math.min(delay + 90, 450);
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       }
@@ -67,6 +83,34 @@ const observer = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+// --- Count-up stats (fact-list values like "100%" and "$0") ---
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const statObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      statObserver.unobserve(entry.target);
+      const match = entry.target.textContent.trim().match(/^(\$?)(\d+)(.*)$/);
+      if (!match || reducedMotion) continue;
+      const [, prefix, num, suffix] = match;
+      const target = parseInt(num, 10);
+      const start = performance.now();
+      const duration = 1100;
+      const tick = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        entry.target.textContent = prefix + Math.round(target * eased) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+  },
+  { threshold: 0.6 }
+);
+
+document.querySelectorAll(".fact-list strong").forEach((el) => statObserver.observe(el));
 
 // --- Contact form ---
 const form = document.getElementById("contact-form");
