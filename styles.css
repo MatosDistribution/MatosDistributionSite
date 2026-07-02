@@ -406,6 +406,20 @@ p { color: var(--light); }
     var(--panel);
 }
 .machine-visual svg { width: min(300px, 100%); margin-inline: auto; }
+.machine-photo {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  margin-inline: auto;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.6));
+}
+
+.how-intro {
+  align-items: center;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+.how-intro .section-lead { margin-bottom: 0; }
+.how-intro .machine-visual { padding: 1.5rem; }
 
 /* ---------- Products ---------- */
 
