@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>¿Cómo Te Fue? — Matos Distribution</title>
+  <meta name="description" content="Deja tu opinión, reporta un problema o sugiere un producto para una máquina de Matos Distribution. Respondemos el mismo día.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://www.matosdistribution.com/es/feedback/">
+  <link rel="alternate" hreflang="en" href="https://www.matosdistribution.com/feedback/">
+  <link rel="alternate" hreflang="es" href="https://www.matosdistribution.com/es/feedback/">
+
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+
+  <link rel="preload" href="/assets/fonts/saira-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    /* ---- Feedback page ---- */
+    .fb-main {
+      width: min(560px, 100% - 2.4rem);
+      margin-inline: auto;
+      padding: clamp(2.2rem, 6vw, 3.6rem) 0 3.5rem;
+    }
+    .fb-main h1 { font-size: clamp(2.6rem, 9vw, 3.8rem); margin-top: 0.4rem; }
+    .fb-sub { color: var(--gray); margin-top: 1rem; max-width: 34rem; }
+
+    .fb-form {
+      margin-top: 2.2rem;
+      border: 1px solid var(--line);
+      background: var(--near-black);
+      padding: clamp(1.4rem, 4vw, 2.2rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    .fb-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray);
+      display: block;
+      margin-bottom: 0.7rem;
+    }
+
+    .fb-stars { display: flex; gap: 0.4rem; }
+    .fb-star {
+      appearance: none;
+      background: none;
+      border: none;
+      padding: 0.15rem;
+      cursor: pointer;
+      color: var(--line);
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    .fb-star svg { width: 42px; height: 42px; }
+    .fb-star.is-on { color: var(--white); }
+    .fb-star:active { transform: scale(0.9); }
+
+    .fb-chips { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .fb-chip {
+      appearance: none;
+      background: var(--black);
+      border: 1px solid var(--line);
+      color: var(--light);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.55rem 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+    .fb-chip.is-on { background: var(--white); color: var(--black); border-color: var(--white); }
+
+    .fb-optional { color: #777; font-weight: 400; letter-spacing: 0.08em; }
+
+    .fb-urgent {
+      display: none;
+      border: 1px solid #25d366;
+      padding: 1rem 1.1rem;
+      gap: 0.35rem;
+      flex-direction: column;
+    }
+    .fb-urgent.is-active { display: flex; }
+    .fb-urgent p { font-size: 0.88rem; color: var(--light); }
+    .fb-urgent a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #25d366;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      margin-top: 0.3rem;
+    }
+    .fb-urgent svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .fb-success {
+      display: none;
+      margin-top: 2.2rem;
+      border: 1px solid var(--line);
+      background: var(--near-black);
+      padding: clamp(2rem, 6vw, 3rem);
+      text-align: center;
+    }
+    .fb-success.is-active { display: block; }
+    .fb-success .fb-check {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.2rem;
+      color: var(--white);
+    }
+    .fb-success h2 { margin-bottom: 0.6rem; }
+    .fb-success p { color: var(--gray); max-width: 26rem; margin-inline: auto; }
+    .fb-follow {
+      display: none;
+      margin-top: 1.6rem;
+    }
+    .fb-follow.is-active { display: block; }
+
+    .fb-topbar { border-bottom: 1px solid var(--line); }
+    .fb-topbar .nav { height: 64px; }
+
+    .fb-footer { border-top: 1px solid var(--line); padding: 1.6rem 0; }
+    .fb-footer p { text-align: center; color: var(--gray); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <header class="fb-topbar">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="nav-logo" href="/es/"><img class="nav-mark" src="/assets/logo-mark-small.png" alt="" width="30" height="30">MATOS<span> DISTRIBUTION</span></a>
+      <div class="lang-switch" aria-label="Idioma">
+        <a href="/feedback/?lang=en" id="lang-en" hreflang="en">EN</a><span aria-hidden="true">/</span><a href="/es/feedback/" id="lang-es" class="is-active" aria-current="page">ES</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="fb-main">
+    <p class="section-kicker" style="margin-bottom:0.6rem;">Encontraste La Máquina</p>
+    <h1>¿Cómo Te Fue?</h1>
+    <p class="fb-sub">Califica tu experiencia, reporta un problema o dinos qué debería vender esta máquina. Tu mensaje llega directo al dueño — respondemos el mismo día.</p>
+
+    <div class="fb-urgent is-active" id="fb-urgent">
+      <p><strong>¿Te cobró y no salió nada?</strong> Olvida el formulario — escríbenos por WhatsApp y lo resolvemos al momento.</p>
+      <a id="fb-wa" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+        WhatsApp — ayuda al instante
+      </a>
+    </div>
+
+    <form class="fb-form" id="fb-form" novalidate>
+      <div class="hp-field" aria-hidden="true">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div>
+        <span class="fb-label" id="stars-label">Tu calificación</span>
+        <div class="fb-stars" role="radiogroup" aria-labelledby="stars-label" id="fb-stars">
+          <button type="button" class="fb-star" data-star="1" role="radio" aria-checked="false" aria-label="1 estrella"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></button>
+          <button type="button" class="fb-star" data-star="2" role="radio" aria-checked="false" aria-label="2 estrellas"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></button>
+          <button type="button" class="fb-star" data-star="3" role="radio" aria-checked="false" aria-label="3 estrellas"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></button>
+          <button type="button" class="fb-star" data-star="4" role="radio" aria-checked="false" aria-label="4 estrellas"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></button>
+          <button type="button" class="fb-star" data-star="5" role="radio" aria-checked="false" aria-label="5 estrellas"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></button>
+        </div>
+      </div>
+
+      <div>
+        <span class="fb-label" id="topic-label">¿De qué se trata?</span>
+        <div class="fb-chips" role="group" aria-labelledby="topic-label" id="fb-chips">
+          <button type="button" class="fb-chip" data-topic="No dispensó el producto">No salió mi producto</button>
+          <button type="button" class="fb-chip" data-topic="Cobró sin dispensar">Me cobró y nada</button>
+          <button type="button" class="fb-chip" data-topic="Problema con el producto">Problema con el producto</button>
+          <button type="button" class="fb-chip" data-topic="Sugerencia de producto">¡Vendan esto!</button>
+          <button type="button" class="fb-chip" data-topic="Elogio">Todo bien 🔥</button>
+          <button type="button" class="fb-chip" data-topic="Otro">Otro</button>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="fb-message">Cuéntanos más</label>
+        <textarea id="fb-message" name="message" rows="4" placeholder="¿Qué pasó? ¿Qué debería vender esta máquina?"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="fb-name">Nombre <span class="fb-optional">opcional</span></label>
+          <input type="text" id="fb-name" name="name" autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="fb-contact">WhatsApp o email <span class="fb-optional">para reembolsos</span></label>
+          <input type="text" id="fb-contact" name="contact" autocomplete="email" placeholder="Para resolverte">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-solid btn-wide">Enviar</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="fb-success" id="fb-success">
+      <svg class="fb-check" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M20 33l8.5 8.5L44 25" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <h2>¡Recibido. Gracias!</h2>
+      <p id="fb-success-msg">Tu mensaje llegó directo al dueño. Si dejaste un contacto, te respondemos hoy mismo.</p>
+      <div class="fb-follow" id="fb-follow">
+        <a class="btn btn-ghost" href="https://www.instagram.com/matosdistributionpr/" target="_blank" rel="noopener">Síguenos en Instagram</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="fb-footer">
+    <p>© 2025 Matos Distribution LLC · San Juan, Puerto Rico · <a href="/es/" style="color:inherit;">matosdistribution.com</a></p>
+  </footer>
+
+  <script>
+    (function () {
+      var FORM_ENDPOINT = "https://formspree.io/f/mqevyjeo";
+      var WHATSAPP_NUMBER = "17874791188";
+
+      var params = new URLSearchParams(location.search);
+      var machine = (params.get("m") || params.get("machine") || "").slice(0, 24);
+
+      // Mantén la máquina al cambiar de idioma
+      var enLink = document.getElementById("lang-en");
+      if (machine) enLink.href = "/feedback/?lang=en&m=" + encodeURIComponent(machine);
+
+      // WhatsApp con mensaje pre-escrito (menciona la máquina si el QR la trae)
+      var waText = "¡Hola! Estoy en una de sus máquinas" + (machine ? " (" + machine + ")" : "") + " y necesito ayuda con mi compra.";
+      document.getElementById("fb-wa").href =
+        "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(waText);
+
+      // Estrellas
+      var rating = 0;
+      var stars = Array.prototype.slice.call(document.querySelectorAll(".fb-star"));
+      stars.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          rating = +btn.dataset.star;
+          stars.forEach(function (s) {
+            var on = +s.dataset.star <= rating;
+            s.classList.toggle("is-on", on);
+            s.setAttribute("aria-checked", String(+s.dataset.star === rating));
+          });
+        });
+      });
+
+      // Chips de tema (selección única)
+      var topic = "";
+      var chips = Array.prototype.slice.call(document.querySelectorAll(".fb-chip"));
+      chips.forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          var on = !chip.classList.contains("is-on");
+          chips.forEach(function (c) { c.classList.remove("is-on"); });
+          topic = "";
+          if (on) { chip.classList.add("is-on"); topic = chip.dataset.topic; }
+        });
+      });
+
+      var form = document.getElementById("fb-form");
+      var status = form.querySelector(".form-status");
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        if (form.company && form.company.value) return; // honeypot
+
+        if (!rating && !topic && !form.message.value.trim()) {
+          status.textContent = "Toca las estrellas o cuéntanos qué pasó primero.";
+          return;
+        }
+
+        var button = form.querySelector("button[type=submit]");
+        button.disabled = true;
+        status.textContent = "Enviando…";
+
+        var data = {
+          _subject: "★".repeat(rating || 0) + (rating ? " " : "") + "Feedback de máquina" + (machine ? " — " + machine : ""),
+          type: "machine-feedback",
+          machine: machine || "no especificada",
+          rating: rating || "sin calificar",
+          topic: topic || "sin seleccionar",
+          message: form.message.value.trim(),
+          name: form.name.value.trim(),
+          contact: form.contact.value.trim(),
+          page: location.pathname
+        };
+
+        try {
+          var res = await fetch(FORM_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify(data)
+          });
+          if (!res.ok) throw new Error("Request failed");
+          form.style.display = "none";
+          document.getElementById("fb-urgent").classList.remove("is-active");
+          var success = document.getElementById("fb-success");
+          success.classList.add("is-active");
+          if (rating >= 4) document.getElementById("fb-follow").classList.add("is-active");
+          success.scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch (err) {
+          status.textContent = "Algo salió mal. Escríbenos por WhatsApp — respondemos rápido.";
+          button.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
