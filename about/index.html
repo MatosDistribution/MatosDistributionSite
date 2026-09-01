@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Who We Are — Matos Distribution</title>
+  <meta name="description" content="Matos Distribution is a San Juan company placing smart vending machines in Puerto Rico's best nightlife venues. Meet the brand behind the machine.">
+  <link rel="canonical" href="https://www.matosdistribution.com/about/">
+  <link rel="alternate" hreflang="en" href="https://www.matosdistribution.com/about/">
+  <link rel="alternate" hreflang="es" href="https://www.matosdistribution.com/es/about/">
+
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+
+  <link rel="preload" href="/assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <!-- Most people scanning at a machine in PR browse in Spanish — send them to the ES page -->
+  <script>
+    (function () {
+      try {
+        var q = new URLSearchParams(location.search);
+        if (q.get("lang") === "en") return;
+        if ((navigator.language || "").toLowerCase().indexOf("es") === 0) {
+          location.replace("/es/about/" + location.search);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    .ab-topbar { border-bottom: 1px solid var(--line); }
+    .ab-topbar .nav { height: 64px; }
+
+    .ab-main {
+      width: min(680px, 100% - 2.4rem);
+      margin-inline: auto;
+      padding: clamp(2.2rem, 6vw, 3.6rem) 0 3.5rem;
+    }
+    .ab-main h1 { font-size: clamp(2.6rem, 9vw, 3.8rem); margin-top: 0.4rem; }
+    .ab-sub { color: var(--light); margin-top: 1rem; max-width: 36rem; font-size: 1.05rem; }
+
+    .ab-points { margin-top: 2.4rem; display: grid; gap: 1rem; }
+    .ab-point {
+      border: 1px solid var(--line);
+      background: var(--near-black);
+      padding: 1.1rem 1.3rem;
+      display: flex;
+      gap: 0.9rem;
+      align-items: baseline;
+    }
+    .ab-point .tick { color: #25d366; font-weight: 700; }
+    .ab-point p { color: var(--light); font-size: 0.95rem; }
+    .ab-point strong { color: var(--white); }
+
+    .ab-machines { margin-top: 2.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .ab-machines img { width: 100%; height: 100%; object-fit: cover; border: 1px solid var(--line); }
+
+    .ab-band {
+      margin-top: 2.6rem;
+      border: 1px solid var(--line);
+      background: var(--near-black);
+      padding: clamp(1.6rem, 5vw, 2.4rem);
+    }
+    .ab-band h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+    .ab-band p { color: var(--gray); margin-top: 0.7rem; max-width: 32rem; }
+    .ab-band .btn { margin-top: 1.3rem; }
+    .ab-wa {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+    }
+    .ab-wa svg { width: 19px; height: 19px; flex-shrink: 0; }
+
+    .ab-links { margin-top: 2.2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+    .ab-footer { border-top: 1px solid var(--line); padding: 1.6rem 0; margin-top: 3rem; }
+    .ab-footer p { text-align: center; color: var(--gray); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <header class="ab-topbar">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="nav-logo" href="/"><img class="nav-mark" src="/assets/logo-mark-small.png" alt="" width="30" height="30">MATOS<span> DISTRIBUTION</span></a>
+      <div class="lang-switch" aria-label="Language">
+        <a href="/about/?lang=en" id="lang-en" class="is-active" aria-current="page">EN</a><span aria-hidden="true">/</span><a href="/es/about/" id="lang-es" lang="es" hreflang="es">ES</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="ab-main">
+    <p class="section-kicker" style="margin-bottom:0.6rem;">You Scanned The Sticker</p>
+    <h1>Meet Matos.</h1>
+    <p class="ab-sub">We're a San Juan company placing smart vending machines inside Puerto Rico's best nightlife spots — so the essentials are always within reach when you're out.</p>
+
+    <div class="ab-points">
+      <div class="ab-point"><span class="tick">●</span><p><strong>Smart machines.</strong> Tap your card or phone — no cash, no hassle.</p></div>
+      <div class="ab-point"><span class="tick">●</span><p><strong>Stocked for the night.</strong> The stuff you actually need after dark, right where you are.</p></div>
+      <div class="ab-point"><span class="tick">●</span><p><strong>Local &amp; fast.</strong> Owned and serviced here in San Juan, with same-day WhatsApp support.</p></div>
+    </div>
+
+    <div class="ab-machines">
+      <img src="/assets/machine-weatherwall.webp" alt="Matos Distribution smart vending machine" loading="lazy">
+      <img src="/assets/machine-slimwall.webp" alt="Slim wall-mounted smart vending machine" loading="lazy">
+    </div>
+
+    <div class="ab-band">
+      <h2>Own a bar or venue?</h2>
+      <p>We install, stock, and service the machine — zero work on your end. Your guests get a premium amenity, your staff stops playing pharmacy.</p>
+      <a class="btn btn-solid ab-wa" href="https://wa.me/17875317623?text=Hi!%20I%27d%20like%20info%20about%20getting%20a%20machine%20in%20my%20venue." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
+        Get a machine — WhatsApp us
+      </a>
+    </div>
+
+    <div class="ab-links">
+      <a class="btn btn-ghost" href="https://www.instagram.com/matosdistributionpr/" target="_blank" rel="noopener">Follow us on Instagram</a>
+      <a class="btn btn-ghost" href="/feedback/">Bought something? Get help</a>
+    </div>
+  </main>
+
+  <footer class="ab-footer">
+    <p>© 2026 Matos Distribution LLC · San Juan, Puerto Rico · <a href="/" style="color:inherit;">matosdistribution.com</a></p>
+  </footer>
+
+</body>
+</html>
