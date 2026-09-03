@@ -122,25 +122,53 @@
 
   <main id="main">
 
-    <!-- HERO -->
+    <!-- HERO — "Órbita": scroll-driven cinematic scene (pure CSS, see styles.css "ÓRBITA HERO").
+         Base state = landing (machine face-on, copy visible); the orbit only plays where
+         scroll-driven animations are supported and motion is welcome. -->
     <section class="hero" aria-label="Introduction">
-      <img class="hero-mark" src="/assets/logo-mark.webp" alt="" aria-hidden="true">
-      <div class="hero-inner">
-        <div class="hero-copy reveal">
-          <p class="hero-kicker">Smart Vending — Puerto Rico</p>
-          <h1>The Future of<br>Convenience<br>Is Here</h1>
-          <p class="hero-sub">Where smart vending meets nightlife.</p>
-          <div class="hero-actions">
-            <a class="btn btn-solid" href="#contact">Partner With Us</a>
-            <a class="btn btn-ghost" href="#machines">See The Machines</a>
+      <div class="orb-track">
+        <div class="orb-scene">
+
+          <!-- flat bar ambiance (never rotates) -->
+          <div class="orb-room" aria-hidden="true"></div>
+          <div class="orb-haze" aria-hidden="true"></div>
+
+          <!-- the rotating 3D world -->
+          <div class="orb-stage3d">
+            <div class="orb-bokeh orb-b1" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b2" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b3" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b4" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b5" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b6" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b7" aria-hidden="true"><i></i></div>
+            <div class="orb-bokeh orb-b8" aria-hidden="true"><i></i></div>
+            <div class="orb-bar-edge" aria-hidden="true"></div>
+
+            <div class="orb-machine">
+              <div class="orb-glowpool" aria-hidden="true"></div>
+              <button type="button" class="orb-machine-btn" data-machine-advance aria-label="Show another machine model">
+                <img class="machine-img" data-machine-img src="/assets/machine-front.webp" alt="Mega Wall 2.0 smart vending machine with a lit touchscreen" width="1040" height="1040" fetchpriority="high">
+              </button>
+              <div class="orb-screen-wake" aria-hidden="true"></div>
+            </div>
           </div>
-        </div>
-        <div class="hero-visual reveal">
-          <div class="machine-switcher">
-            <button type="button" class="machine-stage machine-stage--hero" data-machine-advance aria-label="Show another machine model">
-              <img class="machine-img" data-machine-img data-parallax="30" src="/assets/machine-front.webp" alt="Mega Wall 2.0 smart vending machine with a lit touchscreen" width="1040" height="1040">
-            </button>
-            <div class="machine-switch-ui">
+
+          <!-- focus vignette -->
+          <div class="orb-vignette" aria-hidden="true"></div>
+
+          <!-- hero copy — flat overlay, always the readable top layer -->
+          <div class="orb-ui">
+            <div class="orb-inner">
+              <p class="hero-kicker">Smart Vending — Puerto Rico</p>
+              <h1>The Future of<br>Convenience<br>Is Here</h1>
+              <p class="hero-sub">Where smart vending meets nightlife.</p>
+              <div class="hero-actions">
+                <a class="btn btn-solid" href="#contact">Partner With Us</a>
+                <a class="btn btn-ghost" href="#machines">See The Machines</a>
+              </div>
+            </div>
+            <div class="machine-switch-ui orb-switch">
               <span class="machine-name" data-machine-name>Mega Wall 2.0</span>
               <span class="machine-dots" data-machine-dots aria-hidden="true"></span>
               <button type="button" class="machine-switch-btn" data-machine-advance>
@@ -149,6 +177,12 @@
               </button>
             </div>
           </div>
+
+          <div class="orb-scroll-hint" aria-hidden="true">
+            <span class="orb-mouse"></span>
+            Scroll to arrive
+          </div>
+
         </div>
       </div>
       <div class="hero-marquee" aria-hidden="true">
