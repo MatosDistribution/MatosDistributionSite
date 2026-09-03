@@ -170,6 +170,7 @@ if (machineTriggers.length) {
   const render = () => {
     const model = MACHINE_MODELS[idx];
     imgs.forEach((im) => (im.src = model.src));
+    document.querySelectorAll(".orb-machine").forEach((m) => (m.dataset.model = String(idx)));
     names.forEach((n) => (n.textContent = model.name));
     dotWraps.forEach((wrap) =>
       [...wrap.children].forEach((d, i) => d.classList.toggle("is-active", i === idx))

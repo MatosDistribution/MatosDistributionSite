@@ -158,7 +158,7 @@ p { color: var(--light); }
 .nav-links a:hover { color: var(--white); }
 
 /* Sliding underline on desktop nav links */
-@media (min-width: 621px) {
+@media (min-width: 901px) {
   .nav-links a:not(.nav-cta) { position: relative; }
   .nav-links a:not(.nav-cta)::after {
     content: "";
@@ -507,7 +507,8 @@ p { color: var(--light); }
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(78vw, 430px);
+  --mbox: min(78vw, 430px);
+  width: var(--mbox);
   aspect-ratio: 1 / 1;
   transform: translate(-50%, -50%) translateZ(0px) scale(1); /* base = landed */
   transform-style: preserve-3d;
@@ -549,6 +550,48 @@ p { color: var(--light); }
   transition: opacity 0.18s ease;
 }
 .orb-machine-btn:hover .machine-img { opacity: 0.92; }
+
+/* --- machine VOLUME: back plate + right flank + top/bottom faces, so the
+       unit reads as a real box (not a flat cutout) while the camera is
+       off-axis. Faces share the machine's preserve-3d space; at the landing
+       (rotateY 0) the flank is edge-on and vanishes by itself. Front-face
+       bounds come from each model's image (alpha bbox) via data-model. --- */
+.orb-machine {
+  --mx: 25.3%; --my: 17.5%; --mw: 44.6%; --mh: 76.1%; --mdr: 0.143; /* Mega Wall 2.0 — solid body (antenna excluded) */
+  --md: calc(var(--mbox) * var(--mdr));                            /* depth (length) */
+}
+.orb-machine[data-model="1"] { --mx: 29.2%; --my: 12.6%; --mw: 41.4%; --mh: 77.5%; --mdr: 0.132; } /* Slim Wall */
+.orb-machine[data-model="2"] { --mx: 25.4%; --my: 15.6%; --mw: 47.1%; --mh: 71.3%; --mdr: 0.151; } /* Mini Wall */
+.orb-machine[data-model="3"] { --mx: 29.8%; --my: 11.9%; --mw: 40.0%; --mh: 78.2%; --mdr: 0.128; } /* Slim Tower */
+.orb-machine[data-model="4"] { --mx: 26.6%; --my: 8.5%;  --mw: 46.7%; --mh: 83.7%; --mdr: 0.149; } /* Weather Wall */
+.orb-face {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+.orb-face-back {
+  left: var(--mx); top: var(--my); width: var(--mw); height: var(--mh);
+  transform: translateZ(calc(-1 * var(--md)));
+  background: #0a0a0c;
+  border-radius: 6px;
+}
+.orb-face-side {
+  left: calc(var(--mx) + var(--mw)); top: var(--my); width: var(--md); height: var(--mh);
+  transform-origin: left center;
+  transform: rotateY(90deg);
+  background: linear-gradient(90deg, #1b1b20 0%, #0c0c0f 55%, #08080a 100%);
+  box-shadow: inset 1px 0 0 rgba(215, 230, 255, 0.09);
+}
+.orb-face-top,
+.orb-face-bottom {
+  left: var(--mx); width: var(--mw); height: var(--md);
+  transform-origin: center top;
+  transform: rotateX(-90deg);
+  backface-visibility: visible; /* seen from their reverse side */
+}
+.orb-face-top    { top: var(--my); background: #15151a; }
+.orb-face-bottom { top: calc(var(--my) + var(--mh)); background: #050506; }
 .orb-screen-wake {
   position: absolute;
   left: 50%;
@@ -696,7 +739,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
 
     /* the track owns the timeline; the scene pins under the nav */
     .orb-track {
-      height: 340vh; /* scroll distance for the whole camera move */
+      height: 220vh; /* scroll distance for the whole camera move — shortened for a snappier orbit (was 340vh) */
       view-timeline-name: --orbit;
       view-timeline-axis: block;
     }
@@ -709,7 +752,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-stage3d {
       animation: orb-turn linear both;
       animation-timeline: --orbit;
-      animation-range: cover 15% cover 72%;
+      animation-range: cover 30% cover 62%;
     }
     @keyframes orb-turn {
       from { transform: rotateY(-40deg) rotateX(6deg); }
@@ -720,7 +763,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-machine {
       animation: orb-dolly linear both;
       animation-timeline: --orbit;
-      animation-range: cover 15% cover 72%;
+      animation-range: cover 30% cover 62%;
     }
     @keyframes orb-dolly {
       from { transform: translate(-50%, -50%) translateZ(-380px) scale(0.9); }
@@ -731,7 +774,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-bokeh {
       animation: orb-bokeh-settle linear both;
       animation-timeline: --orbit;
-      animation-range: cover 16% cover 70%;
+      animation-range: cover 31% cover 61%;
     }
     @keyframes orb-bokeh-settle {
       from { opacity: 0.92; filter: blur(7px); }
@@ -744,7 +787,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-b1, .orb-b5, .orb-b7 {
       animation-timeline: --orbit, --orbit;
       animation-fill-mode: both, both;
-      animation-range: cover 16% cover 70%, cover 16% cover 72%;
+      animation-range: cover 31% cover 61%, cover 31% cover 62%;
     }
     @keyframes orb-drift-l  { from { translate: 0 0; } to { translate: -34% 6%; } }
     @keyframes orb-drift-r  { from { translate: 0 0; } to { translate: 34% 6%; } }
@@ -753,7 +796,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-bar-edge {
       animation: orb-bar-settle linear both;
       animation-timeline: --orbit;
-      animation-range: cover 16% cover 72%;
+      animation-range: cover 31% cover 62%;
     }
     @keyframes orb-bar-settle {
       from { opacity: 0.95; transform: translateZ(360px) rotateX(80deg); }
@@ -763,7 +806,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-room {
       animation: orb-room-settle linear both;
       animation-timeline: --orbit;
-      animation-range: cover 12% cover 72%;
+      animation-range: cover 28% cover 62%;
     }
     @keyframes orb-room-settle {
       from { opacity: 1;   transform: scale(1.15) translateX(3%); }
@@ -774,7 +817,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-machine .machine-img {
       animation: orb-screen-power linear both;
       animation-timeline: --orbit;
-      animation-range: cover 50% cover 72%;
+      animation-range: cover 50% cover 62%;
     }
     @keyframes orb-screen-power {
       from { filter: brightness(0.72) contrast(1.02) drop-shadow(0 34px 60px rgba(0, 0, 0, 0.8)); }
@@ -783,7 +826,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-screen-wake {
       animation: orb-wake-glow linear both;
       animation-timeline: --orbit;
-      animation-range: cover 52% cover 74%;
+      animation-range: cover 51% cover 63%;
     }
     @keyframes orb-wake-glow {
       from { opacity: 0; filter: blur(16px); }
@@ -793,14 +836,14 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-glowpool {
       animation: orb-pool-glow linear both;
       animation-timeline: --orbit;
-      animation-range: cover 46% cover 72%;
+      animation-range: cover 47% cover 62%;
     }
     @keyframes orb-pool-glow { from { opacity: 0; } to { opacity: 0.55; } }
 
     .orb-vignette {
       animation: orb-vignette-in linear both;
       animation-timeline: --orbit;
-      animation-range: cover 24% cover 72%;
+      animation-range: cover 35% cover 62%;
     }
     @keyframes orb-vignette-in { from { opacity: 0.25; } to { opacity: 0.92; } }
 
@@ -808,7 +851,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-ui .hero-kicker {
       animation: orb-ui-early linear both;
       animation-timeline: --orbit;
-      animation-range: cover 4% cover 18%;
+      animation-range: cover 24% cover 32%;
     }
     @keyframes orb-ui-early {
       from { opacity: 0; transform: translateY(12px); }
@@ -818,22 +861,22 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-ui h1 {
       animation: orb-ui-land linear both;
       animation-timeline: --orbit;
-      animation-range: cover 50% cover 70%;
+      animation-range: cover 50% cover 61%;
     }
     .orb-ui .hero-sub {
       animation: orb-ui-land linear both;
       animation-timeline: --orbit;
-      animation-range: cover 56% cover 73%;
+      animation-range: cover 53% cover 63%;
     }
     .orb-ui .hero-actions {
       animation: orb-ui-land linear both;
       animation-timeline: --orbit;
-      animation-range: cover 62% cover 75%;
+      animation-range: cover 56% cover 64%;
     }
     .orb-switch {
       animation: orb-ui-land linear both;
       animation-timeline: --orbit;
-      animation-range: cover 64% cover 76%;
+      animation-range: cover 58% cover 64%;
     }
     @keyframes orb-ui-land {
       from { opacity: 0; transform: translateY(30px); }
@@ -860,7 +903,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     .orb-scroll-hint {
       animation: orb-hint-in-out linear both;
       animation-timeline: --orbit;
-      animation-range: cover 3% cover 55%;
+      animation-range: cover 23% cover 52%;
     }
     @keyframes orb-hint-in-out {
       0%   { opacity: 0; transform: translate(-50%, 10px); }
@@ -893,7 +936,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
   .orb-scene { perspective-origin: 50% 40%; }
   .orb-machine {
     top: 28%;
-    width: min(74vw, 330px);
+    --mbox: min(74vw, 330px);
   }
   .orb-ui {
     justify-content: flex-end;
@@ -931,7 +974,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
 }
 /* short phones: smaller machine, tighter type, so copy never covers the screen */
 @media (max-width: 860px) and (max-height: 700px) {
-  .orb-machine { top: 26%; width: min(60vw, 270px); }
+  .orb-machine { top: 26%; --mbox: min(60vw, 270px); }
   .orb-ui h1,
   html[lang="es"] .orb-ui h1 { font-size: clamp(2.1rem, 9.2vw, 3rem); }
   .orb-ui .hero-sub { font-size: 0.98rem; }
@@ -949,7 +992,7 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
      otherwise keep offsetting the now-relative scene 72px downwards
      (blank band under the nav, scene overlapping the marquee). */
   .orb-scene { position: relative; top: auto; height: auto; min-height: 600px; }
-  .orb-machine { top: 34%; width: min(74vw, 330px); }
+  .orb-machine { top: 34%; --mbox: min(74vw, 330px); }
   .orb-stage3d,
   .orb-machine,
   .orb-bokeh,
@@ -1482,23 +1525,11 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
   .product-grid, .feature-grid { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 620px) {
+/* Header collapses to the hamburger drawer below 900px: between 621 and
+   ~900px the inline links overflowed and overlapped the wordmark. */
+@media (max-width: 900px) {
   .nav-toggle { display: flex; }
   .nav-right { gap: 0.6rem; }
-  .trust-strip ul { flex-direction: column; align-items: center; gap: 0.85rem; }
-
-  /* Keep the hero CTAs side by side on phones */
-  .hero-actions { flex-wrap: nowrap; gap: 0.7rem; }
-  .hero-actions .btn {
-    flex: 1 1 0;
-    min-width: 0;
-    padding: 0.85rem 0.5rem;
-    text-align: center;
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
-    line-height: 1.25;
-  }
-
   .nav-links {
     position: absolute;
     top: var(--nav-h);
@@ -1518,6 +1549,37 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     padding: 1.1rem 1.5rem;
   }
   .nav-links a.nav-cta { border: none; }
+}
+
+/* Phones: keep the mark + MATOS, hide the long wordmark visually (still
+   read by assistive tech) so it never collides with the EN/ES switch. */
+@media (max-width: 480px) {
+  .nav-logo { font-size: 1.15rem; }
+  .nav-logo span {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 620px) {
+  .trust-strip ul { flex-direction: column; align-items: center; gap: 0.85rem; }
+
+  /* Keep the hero CTAs side by side on phones */
+  .hero-actions { flex-wrap: nowrap; gap: 0.7rem; }
+  .hero-actions .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.85rem 0.5rem;
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+  }
+
 
   .form-row { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: 1fr; }
