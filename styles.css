@@ -525,6 +525,7 @@ p { color: var(--light); }
   margin: 0;
   color: inherit;
   cursor: pointer;
+  transform-style: preserve-3d; /* the two photo planes rotate with the scene's perspective */
 }
 .orb-machine .machine-img {
   width: 100%;
@@ -547,6 +548,8 @@ p { color: var(--light); }
   height: 100%;
   object-fit: contain;
   transform: translateY(3.8%); /* aligns its body with the front photo's body */
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
   opacity: 0;                  /* base = landed: hidden */
   pointer-events: none;
   will-change: opacity;
@@ -775,18 +778,24 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
     }
     /* the 3/4 → front cross-fade only runs once the 3/4 photo has LOADED (script.js adds
        .orb-ready) and only for the Mega Wall: otherwise the front photo is visible from frame one */
+    /* Two-frame turntable: the 3/4 photo plane rotates away (its side compresses, as when the
+       unit turns to face you) while the front photo plane arrives already yawed and settles to 0°.
+       The photo hand-off happens mid-turn, where both poses match, with an overlap so brightness
+       never dips — the machine is in motion for the whole move. */
     .orb-machine.orb-ready[data-model="0"] .machine-img {
-      animation: orb-screen-power linear both, orb-front-in linear both;
-      animation-timeline: --orbit, --orbit;
-      animation-range: cover 50% cover 62%, cover 44% cover 56%;
+      animation: orb-screen-power linear both, orb-front-in linear both, orb-front-turn cubic-bezier(0.4, 0, 0.6, 1) both;
+      animation-timeline: --orbit, --orbit, --orbit;
+      animation-range: cover 50% cover 62%, cover 45% cover 51%, cover 44% cover 62%;
     }
-    @keyframes orb-front-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes orb-front-in   { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes orb-front-turn { from { transform: translateX(-6%) rotateY(14deg) scale(0.84); } to { transform: translateX(0) rotateY(0deg) scale(1); } } /* arrives small and left so its face overlays the 3/4 face at the hand-off, then grows into place */
     .orb-machine.orb-ready[data-model="0"] .orb-angle {
-      animation: orb-angle-out linear both;
-      animation-timeline: --orbit;
-      animation-range: cover 44% cover 56%;
+      animation: orb-angle-out linear both, orb-angle-turn cubic-bezier(0.42, 0, 0.58, 1) both;
+      animation-timeline: --orbit, --orbit;
+      animation-range: cover 47% cover 53%, cover 30% cover 56%;
     }
-    @keyframes orb-angle-out { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes orb-angle-out  { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes orb-angle-turn { from { transform: translateY(3.8%) rotateY(0deg); } to { transform: translateY(3.8%) rotateY(18deg); } }
     @keyframes orb-screen-power {
       from { filter: brightness(0.92) contrast(1.03); }
       to   { filter: brightness(1.08) contrast(1.06); }
