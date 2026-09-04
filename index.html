@@ -36,6 +36,7 @@
   <!-- Fonts: Anton self-hosted (preloaded — it renders the headline), Inter from Google -->
   <link rel="preload" href="/assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/machine-front.webp" as="image">
+  <link rel="preload" href="/assets/machine-angle.webp" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -144,14 +145,17 @@
             <div class="orb-bokeh orb-b7" aria-hidden="true"><i></i></div>
             <div class="orb-bokeh orb-b8" aria-hidden="true"><i></i></div>
 
-            <div class="orb-machine" data-model="0">
-              <i class="orb-face orb-face-back" aria-hidden="true"></i><i class="orb-face orb-face-side" aria-hidden="true"></i><i class="orb-face orb-face-top" aria-hidden="true"></i><i class="orb-face orb-face-bottom" aria-hidden="true"></i>
-              <div class="orb-glowpool" aria-hidden="true"></div>
-              <button type="button" class="orb-machine-btn" data-machine-advance aria-label="Show another machine model">
-                <img class="machine-img" data-machine-img src="/assets/machine-front.webp" alt="Mega Wall 2.0 smart vending machine with a lit touchscreen" width="1040" height="1040" fetchpriority="high">
-              </button>
-              <div class="orb-screen-wake" aria-hidden="true"></div>
-            </div>
+          </div>
+
+          <!-- the machine sits OUTSIDE the rotating stage: the 3/4 photo carries its own perspective,
+               so it stays face-on while the room orbits; only the dolly (translateZ/scale) animates it -->
+          <div class="orb-machine" data-model="0">
+            <div class="orb-glowpool" aria-hidden="true"></div>
+            <button type="button" class="orb-machine-btn" data-machine-advance aria-label="Show another machine model">
+              <img class="machine-img" data-machine-img src="/assets/machine-front.webp" alt="Mega Wall 2.0 smart vending machine with a lit touchscreen" width="1040" height="1040" fetchpriority="high">
+              <img class="orb-angle" src="/assets/machine-angle.webp" alt="" aria-hidden="true" width="1400" height="1400" fetchpriority="high" decoding="async">
+            </button>
+            <div class="orb-screen-wake" aria-hidden="true"></div>
           </div>
 
           <!-- focus vignette -->
