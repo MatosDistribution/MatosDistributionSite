@@ -769,12 +769,19 @@ html[lang="es"] .orb-ui h1 { font-size: clamp(2.6rem, 5.7vw, 4.7rem); }
 
     /* the screen wakes at the end of the landing */
     .orb-machine .machine-img {
+      animation: orb-screen-power linear both;
+      animation-timeline: --orbit;
+      animation-range: cover 50% cover 62%;
+    }
+    /* the 3/4 → front cross-fade only runs once the 3/4 photo has LOADED (script.js adds
+       .orb-ready) and only for the Mega Wall: otherwise the front photo is visible from frame one */
+    .orb-machine.orb-ready[data-model="0"] .machine-img {
       animation: orb-screen-power linear both, orb-front-in linear both;
       animation-timeline: --orbit, --orbit;
       animation-range: cover 50% cover 62%, cover 44% cover 56%;
     }
     @keyframes orb-front-in { from { opacity: 0; } to { opacity: 1; } }
-    .orb-angle {
+    .orb-machine.orb-ready[data-model="0"] .orb-angle {
       animation: orb-angle-out linear both;
       animation-timeline: --orbit;
       animation-range: cover 44% cover 56%;

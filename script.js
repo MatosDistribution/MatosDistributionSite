@@ -186,6 +186,13 @@ if (machineTriggers.length) {
   render();
 }
 
+// --- Hero: enable the 3/4 → front cross-fade only once the 3/4 photo is actually loaded ---
+document.querySelectorAll(".orb-angle").forEach((img) => {
+  const ready = () => img.closest(".orb-machine")?.classList.add("orb-ready");
+  if (img.complete && img.naturalWidth > 0) ready();
+  else img.addEventListener("load", ready, { once: true });
+});
+
 // --- Revenue estimator ---
 const estNights = document.getElementById("est-nights");
 if (estNights) {
