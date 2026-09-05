@@ -1,2 +1,14 @@
 .DS_Store
 .claude/settings.local.json
+
+# Nuvo studio — separate repo
+nuvo/
+
+# Ferretería Miramar (Nuvo client) — separate repo
+ferreteria-miramar/
+
+# Personal data / local scratch — never publish
+matos-digital-leads-*.csv
+matos-digital-leads-*.xlsx
+carros-titi.png
+_proto/

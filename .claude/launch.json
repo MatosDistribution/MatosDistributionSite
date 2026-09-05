@@ -6,6 +6,18 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "4173"],
       "port": 4173
+    },
+    {
+      "name": "ferreteria",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4180", "--directory", "ferreteria-miramar"],
+      "port": 4180
+    },
+    {
+      "name": "nuvo",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4181", "--directory", "nuvo"],
+      "port": 4181
     }
   ]
 }
