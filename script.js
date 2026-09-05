@@ -170,7 +170,6 @@ if (machineTriggers.length) {
   const render = () => {
     const model = MACHINE_MODELS[idx];
     imgs.forEach((im) => (im.src = model.src));
-    document.querySelectorAll(".orb-machine").forEach((m) => (m.dataset.model = String(idx)));
     names.forEach((n) => (n.textContent = model.name));
     dotWraps.forEach((wrap) =>
       [...wrap.children].forEach((d, i) => d.classList.toggle("is-active", i === idx))
@@ -185,13 +184,6 @@ if (machineTriggers.length) {
   machineTriggers.forEach((t) => t.addEventListener("click", advance));
   render();
 }
-
-// --- Hero: enable the 3/4 → front cross-fade only once the 3/4 photo is actually loaded ---
-document.querySelectorAll(".orb-angle").forEach((img) => {
-  const ready = () => img.closest(".orb-machine")?.classList.add("orb-ready");
-  if (img.complete && img.naturalWidth > 0) ready();
-  else img.addEventListener("load", ready, { once: true });
-});
 
 // --- Revenue estimator ---
 const estNights = document.getElementById("est-nights");

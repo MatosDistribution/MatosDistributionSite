@@ -36,7 +36,6 @@
   <!-- Fonts: Anton self-hosted (preloaded — it renders the headline), Inter from Google -->
   <link rel="preload" href="/assets/fonts/saira-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/machine-front.webp" as="image">
-  <link rel="preload" href="/assets/machine-angle.webp" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -125,56 +124,25 @@
 
   <main id="main">
 
-    <!-- HERO — "Órbita": escena cinematográfica dirigida por scroll (CSS puro, ver styles.css "ÓRBITA HERO").
-         Estado base = aterrizaje (máquina de frente, copy visible); la órbita solo se reproduce donde hay
-         soporte de scroll-driven animations y el usuario acepta movimiento. -->
+    <!-- HERO -->
     <section class="hero" aria-label="Introducción">
-      <div class="orb-track">
-        <div class="orb-scene">
-
-          <!-- ambiente plano del bar (nunca rota) -->
-          <div class="orb-room" aria-hidden="true"></div>
-          <div class="orb-haze" aria-hidden="true"></div>
-
-          <!-- el mundo 3D que rota -->
-          <div class="orb-stage3d">
-            <div class="orb-bokeh orb-b1" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b2" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b3" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b4" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b5" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b6" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b7" aria-hidden="true"><i></i></div>
-            <div class="orb-bokeh orb-b8" aria-hidden="true"><i></i></div>
-
+      <img class="hero-mark" src="/assets/logo-mark.webp" alt="" aria-hidden="true">
+      <div class="hero-inner">
+        <div class="hero-copy reveal">
+          <p class="hero-kicker">Vending Inteligente — Puerto Rico</p>
+          <h1>El Futuro de la <br>Conveniencia <br>Está Aquí</h1>
+          <p class="hero-sub">Donde la conveniencia inteligente se une a la vida nocturna.</p>
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="#contact">Hazte Socio</a>
+            <a class="btn btn-ghost" href="#machines">Ver Las Máquinas</a>
           </div>
-
-          <!-- the machine sits OUTSIDE the rotating stage: the 3/4 photo carries its own perspective,
-               so it stays face-on while the room orbits; only the dolly (translateZ/scale) animates it -->
-          <div class="orb-machine" data-model="0">
-            <div class="orb-glowpool" aria-hidden="true"></div>
-            <button type="button" class="orb-machine-btn" data-machine-advance aria-label="Ver otro modelo de máquina">
-              <img class="machine-img" data-machine-img src="/assets/machine-front.webp" alt="Máquina de vending inteligente Mega Wall con pantalla táctil encendida" width="1040" height="1040" fetchpriority="high">
-              <img class="orb-angle" src="/assets/machine-angle.webp" alt="" aria-hidden="true" width="1400" height="1400" fetchpriority="high" decoding="async">
+        </div>
+        <div class="hero-visual reveal">
+          <div class="machine-switcher">
+            <button type="button" class="machine-stage machine-stage--hero" data-machine-advance aria-label="Ver otro modelo de máquina">
+              <img class="machine-img" data-machine-img data-parallax="30" src="/assets/machine-front.webp" alt="Máquina de vending inteligente Mega Wall con pantalla táctil encendida" width="1040" height="1040">
             </button>
-            <div class="orb-screen-wake" aria-hidden="true"></div>
-          </div>
-
-          <!-- viñeta de enfoque -->
-          <div class="orb-vignette" aria-hidden="true"></div>
-
-          <!-- copy del hero — capa plana, siempre la capa legible superior -->
-          <div class="orb-ui">
-            <div class="orb-inner">
-              <p class="hero-kicker">Vending Inteligente — Puerto Rico</p>
-              <h1>El Futuro de la <br>Conveniencia <br>Está Aquí</h1>
-              <p class="hero-sub">Donde la conveniencia inteligente se une a la vida nocturna.</p>
-              <div class="hero-actions">
-                <a class="btn btn-solid" href="#contact">Hazte Socio</a>
-                <a class="btn btn-ghost" href="#machines">Ver Las Máquinas</a>
-              </div>
-            </div>
-            <div class="machine-switch-ui orb-switch">
+            <div class="machine-switch-ui">
               <span class="machine-name" data-machine-name>Mega Wall 2.0</span>
               <span class="machine-dots" data-machine-dots aria-hidden="true"></span>
               <button type="button" class="machine-switch-btn" data-machine-advance>
@@ -183,12 +151,6 @@
               </button>
             </div>
           </div>
-
-          <div class="orb-scroll-hint" aria-hidden="true">
-            <span class="orb-mouse"></span>
-            Desliza para llegar
-          </div>
-
         </div>
       </div>
       <div class="hero-marquee" aria-hidden="true">
