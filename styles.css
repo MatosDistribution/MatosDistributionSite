@@ -579,6 +579,10 @@ p { color: var(--light); }
 }
 .product-card:hover svg { transform: translateY(-4px); }
 .product-card h3 { font-size: 0.95rem; letter-spacing: 0.12em; }
+.product-card { gap: 0.9rem; }
+.product-card h3 { max-width: 16ch; }
+.product-card p { font-size: 0.9rem; line-height: 1.5; color: var(--gray); max-width: 24ch; margin: 0; }
+.product-note { margin-top: 1rem; font-size: 0.8rem; color: var(--gray); font-style: italic; }
 
 /* ---------- Features ---------- */
 
