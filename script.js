@@ -139,12 +139,12 @@ if (parallaxEls.length && !reducedMotion) {
 
 // --- Machine model switcher (hero + Machines section stay in sync) ---
 const MACHINE_MODELS = [
-  { name: "Mega Wall 2.0", src: "/assets/machine-front.webp" },
-  { name: "Slim Wall", src: "/assets/machine-slimwall.webp" },
-  { name: "Mini Wall", src: "/assets/machine-miniwall.webp" },
-  { name: "Slim Tower", src: "/assets/machine-slimtower.webp" },
-  { name: "Weather Wall", src: "/assets/machine-weatherwall.webp" },
-];
+  { name: "Mega Wall 2.0", slug: "machine-front" },
+  { name: "Slim Wall", slug: "machine-slimwall" },
+  { name: "Mini Wall", slug: "machine-miniwall" },
+  { name: "Slim Tower", slug: "machine-slimtower" },
+  { name: "Weather Wall", slug: "machine-weatherwall" },
+].map((m) => ({ ...m, src: `/assets/${m.slug}.webp`, srcset: `/assets/${m.slug}-560.webp 560w, /assets/${m.slug}.webp 1040w` }));
 const machineTriggers = document.querySelectorAll("[data-machine-advance]");
 if (machineTriggers.length) {
   const imgs = document.querySelectorAll("[data-machine-img]");
@@ -166,7 +166,7 @@ if (machineTriggers.length) {
   const preloadModels = () => {
     if (preloaded) return;
     preloaded = true;
-    MACHINE_MODELS.slice(1).forEach((m) => { const im = new Image(); im.src = m.src; });
+    MACHINE_MODELS.slice(1).forEach((m) => { const im = new Image(); im.sizes = "(max-width: 900px) 280px, 520px"; im.srcset = m.srcset; im.src = m.src; });
   };
   if ("requestIdleCallback" in window) requestIdleCallback(preloadModels, { timeout: 4000 });
   else setTimeout(preloadModels, 2500);
@@ -174,10 +174,10 @@ if (machineTriggers.length) {
   const render = () => {
     const model = MACHINE_MODELS[idx];
     imgs.forEach((im) => {
-      if (im.src.endsWith(model.src)) return;
+      if (im.dataset.model === model.slug) return; im.dataset.model = model.slug;
       im.classList.add("is-swapping");
-      const swap = () => { im.src = model.src; im.alt = model.name + " smart vending machine"; im.classList.remove("is-swapping"); };
-      const pre = new Image(); pre.onload = swap; pre.onerror = swap; pre.src = model.src;
+      const swap = () => { im.srcset = model.srcset; im.src = model.src; im.alt = model.name + " smart vending machine"; im.classList.remove("is-swapping"); };
+      const pre = new Image(); pre.onload = swap; pre.onerror = swap; pre.sizes = im.sizes || "520px"; pre.srcset = model.srcset; pre.src = model.src;
     });
     names.forEach((n) => (n.textContent = model.name));
     dotWraps.forEach((wrap) =>

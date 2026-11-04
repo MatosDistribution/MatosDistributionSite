@@ -35,10 +35,10 @@
 
   <!-- Fonts: Anton self-hosted (preloaded — it renders the headline), Inter self-hosted -->
   <link rel="preload" href="/assets/fonts/saira-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/machine-front.webp" as="image" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/machine-front.webp" imagesrcset="/assets/machine-front-560.webp 560w, /assets/machine-front.webp 1040w" imagesizes="(max-width: 900px) 280px, 520px" fetchpriority="high">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="/styles.css?v=20261104">
+  <link rel="stylesheet" href="/styles.css?v=20261104b">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -51,11 +51,21 @@
     "email": "ematos@matosdistribution.com",
     "logo": "https://www.matosdistribution.com/assets/logo-mark.webp",
     "image": "https://www.matosdistribution.com/og-image-es.png",
+    "telephone": "+1-787-531-7623",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "sales",
+      "telephone": "+1-787-531-7623",
       "email": "ematos@matosdistribution.com",
-      "availableLanguage": ["es", "en"]
+      "availableLanguage": ["es", "en"],
+      "areaServed": "PR"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Vending inteligente para locales",
+      "itemListElement": [
+        { "@type": "Offer", "price": "0", "priceCurrency": "USD", "itemOffered": { "@type": "Service", "name": "Colocación de máquina expendedora inteligente totalmente administrada", "description": "Máquina expendedora sin efectivo instalada, surtida, mantenida y asegurada sin costo para el local, con una participación mensual de las ventas para el local.", "areaServed": "Puerto Rico", "serviceType": "Colocación de máquinas expendedoras" } }
+      ]
     },
     "sameAs": [
       "https://www.instagram.com/matosdistributionpr/",
@@ -74,7 +84,8 @@
       "@type": "State",
       "name": "Puerto Rico"
     },
-    "knowsAbout": ["máquinas expendedoras inteligentes", "pagos sin efectivo", "amenidades para la vida nocturna", "alianzas de ingresos compartidos"],
+    "knowsAbout": ["máquinas expendedoras inteligentes", "pagos sin efectivo", "amenidades para la vida nocturna", "alianzas de ingresos compartidos", "verificación de edad para productos 21+", "barras y discotecas en Puerto Rico"],
+    "openingHours": "Mo-Su 00:00-23:59",
     "slogan": "Donde la conveniencia inteligente se une a la vida nocturna."
   }
   </script>
@@ -138,7 +149,7 @@
         <div class="hero-visual reveal">
           <div class="machine-switcher">
             <button type="button" class="machine-stage machine-stage--hero" data-machine-advance aria-label="Ver otro modelo de máquina">
-              <img class="machine-img" data-machine-img data-parallax="30" src="/assets/machine-front.webp" fetchpriority="high" decoding="async" alt="Máquina de vending inteligente Mega Wall con pantalla táctil encendida" width="1040" height="1040">
+              <img class="machine-img" data-machine-img data-parallax="30" src="/assets/machine-front.webp" srcset="/assets/machine-front-560.webp 560w, /assets/machine-front.webp 1040w" sizes="(max-width: 900px) 280px, 520px" fetchpriority="high" decoding="async" alt="Máquina de vending inteligente Mega Wall con pantalla táctil encendida" width="1040" height="1040">
             </button>
             <div class="machine-switch-ui">
               <span class="machine-name" data-machine-name>Mega Wall 2.0</span>
@@ -201,7 +212,7 @@
             <p class="section-lead reveal">De tu primer mensaje a una máquina funcionando en 1–2 semanas — sin que muevas un dedo. Nosotros la instalamos, la surtimos y la mantenemos.</p>
           </div>
           <div class="machine-visual reveal">
-            <img class="machine-photo" data-parallax="14" src="/assets/machine-interior.webp" alt="Una máquina de vending de Matos Distribution abierta y surtida de esenciales para la vida nocturna" width="1200" height="1200" loading="lazy" decoding="async">
+            <img class="machine-photo" data-parallax="14" src="/assets/machine-interior.webp" srcset="/assets/machine-interior-720.webp 720w, /assets/machine-interior.webp 1200w" sizes="(max-width: 900px) 92vw, 560px" alt="Una máquina de vending de Matos Distribution abierta y surtida de esenciales para la vida nocturna" width="1200" height="1200" loading="lazy" decoding="async">
           </div>
         </div>
         <div class="feature-grid steps-grid">
@@ -232,7 +243,7 @@
           <div class="machine-visual reveal">
             <div class="machine-switcher">
               <button type="button" class="machine-stage" data-machine-advance aria-label="Ver otro modelo de máquina">
-                <img class="machine-img" data-machine-img data-parallax="14" src="/assets/machine-front.webp" alt="Máquina de vending inteligente Mega Wall — pantalla táctil, lector de tarjetas sin contacto y lector de ID integrado" width="1040" height="1040" loading="lazy" decoding="async">
+                <img class="machine-img" data-machine-img data-parallax="14" src="/assets/machine-front.webp" srcset="/assets/machine-front-560.webp 560w, /assets/machine-front.webp 1040w" sizes="(max-width: 900px) 280px, 520px" alt="Máquina de vending inteligente Mega Wall — pantalla táctil, lector de tarjetas sin contacto y lector de ID integrado" width="1040" height="1040" loading="lazy" decoding="async">
               </button>
               <div class="machine-switch-ui">
                 <span class="machine-name" data-machine-name>Mega Wall 2.0</span>
@@ -498,7 +509,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.2-.8-.7-1.3-1.5-1.4-1.8-.2-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg>
   </a>
 
-  <script src="/script.js?v=20261104" defer></script>
+  <script src="/script.js?v=20261104b" defer></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
