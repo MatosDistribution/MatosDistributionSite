@@ -25,9 +25,11 @@
     .loc-hero{padding:clamp(4rem,10vw,7rem) 0 clamp(3rem,6vw,5rem)}
     .loc-hero h1{font-family:var(--font-display);font-size:clamp(2.6rem,7vw,5rem);line-height:.98;text-transform:uppercase;margin:.4rem 0 1.2rem}
     .loc-hero .container{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
-    .loc-photo{margin:0;position:relative}
-    .loc-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line);display:block}
-    .loc-photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:.9rem 1rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);background:linear-gradient(transparent,rgba(0,0,0,.85))}
+    .loc-photo{margin:0;position:relative;box-shadow:0 30px 80px -30px rgba(0,0,0,.9)}
+    .loc-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;display:block}
+    .loc-photo::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);pointer-events:none}
+    .loc-photo figcaption{position:absolute;left:1rem;top:1rem;display:inline-flex;align-items:center;gap:.6rem;padding:.5rem .8rem;background:rgba(10,10,10,.72);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);font-family:var(--font-display);font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--white)}
+    .loc-photo figcaption::before{content:"";width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 10px #3ddc84}
     @media(max-width:900px){.loc-hero .container{grid-template-columns:1fr;gap:2rem}.loc-photo{max-width:420px}}
     .loc-lead{max-width:60ch;color:var(--light);font-size:1.1rem}
     .loc-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.6rem}
@@ -71,7 +73,7 @@
         </div>
         <figure class="loc-photo">
           <img src="/assets/placita-buena-barra-800.webp" srcset="/assets/placita-buena-barra-800.webp 800w, /assets/placita-buena-barra-1400.webp 1400w" sizes="(max-width: 900px) 92vw, 40vw" width="800" height="1000" alt="Máquina expendedora inteligente de Matos Distribution instalada dentro de La Buena Barra en La Placita de Santurce, pantalla con Vapes & Convenience, Tap to Buy" fetchpriority="high" decoding="async">
-          <figcaption>Dentro de La Buena Barra · instalada oct 2026</figcaption>
+          <figcaption>En vivo en La Buena Barra</figcaption>
         </figure>
       </div>
     </section>
