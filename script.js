@@ -161,15 +161,24 @@ if (machineTriggers.length) {
     });
   });
 
-  // Preload every model so switching is instant
-  MACHINE_MODELS.forEach((m) => {
-    const im = new Image();
-    im.src = m.src;
-  });
+  // Preload the other models once the page is idle (not during first paint)
+  let preloaded = false;
+  const preloadModels = () => {
+    if (preloaded) return;
+    preloaded = true;
+    MACHINE_MODELS.slice(1).forEach((m) => { const im = new Image(); im.src = m.src; });
+  };
+  if ("requestIdleCallback" in window) requestIdleCallback(preloadModels, { timeout: 4000 });
+  else setTimeout(preloadModels, 2500);
 
   const render = () => {
     const model = MACHINE_MODELS[idx];
-    imgs.forEach((im) => (im.src = model.src));
+    imgs.forEach((im) => {
+      if (im.src.endsWith(model.src)) return;
+      im.classList.add("is-swapping");
+      const swap = () => { im.src = model.src; im.alt = model.name + " smart vending machine"; im.classList.remove("is-swapping"); };
+      const pre = new Image(); pre.onload = swap; pre.onerror = swap; pre.src = model.src;
+    });
     names.forEach((n) => (n.textContent = model.name));
     dotWraps.forEach((wrap) =>
       [...wrap.children].forEach((d, i) => d.classList.toggle("is-active", i === idx))
@@ -182,6 +191,21 @@ if (machineTriggers.length) {
   };
 
   machineTriggers.forEach((t) => t.addEventListener("click", advance));
+
+  // Desktop: every time the pointer passes over a machine, show the next model
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    let lastHover = 0;
+    document.querySelectorAll(".machine-stage").forEach((stage) => {
+      stage.addEventListener("mouseenter", () => {
+        preloadModels();
+        const now = Date.now();
+        if (now - lastHover < 350) return;
+        lastHover = now;
+        advance();
+      });
+    });
+  }
+  document.querySelectorAll(".machine-stage").forEach((s) => s.addEventListener("touchstart", preloadModels, { passive: true, once: true }));
   render();
 }
 
